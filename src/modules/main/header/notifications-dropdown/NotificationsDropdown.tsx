@@ -29,7 +29,7 @@ const NotificationsDropdown = () => {
 
   return (
     <StyledDropdown hideArrow>
-      <div slot="button">
+      {/* <div slot="button">
         <i className="far fa-bell" />
         <span className="badge badge-warning navbar-badge">15</span>
       </div>
@@ -86,7 +86,7 @@ const NotificationsDropdown = () => {
         <Link to="/" className="dropdown-item dropdown-footer">
           {t<string>('header.notifications.seeAll')}
         </Link>
-      </div>
+      </div> */}
     </StyledDropdown>
   );
 };

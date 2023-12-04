@@ -1,0 +1,67 @@
+export const nodes = [
+    {
+      id: "1",
+      nome: "João Silva",
+      email: "joao.silva@example.com",
+      numeroTelemovel: "912345678",
+      morada: "Rua da Liberdade, 123, 4560-789 Viseu",
+      CartaConducao: true,
+    },
+    {
+      id: "2",
+      nome: "Maria Santos",
+      email: "maria.santos@example.com",
+      numeroTelemovel: "965432109",
+      morada: "Avenida da República, 456, 7890-123 Porto",
+      CartaConducao: false,
+    },
+    {
+      id: "3",
+      nome: "João Silva",
+      email: "joao.silva@example.com",
+      numeroTelemovel: "912345678",
+      morada: "Rua da Liberdade, 123, 4560-789 Viseu",
+      CartaConducao: true,
+    },
+    {
+      id: "4",
+      nome: "Maria Santos",
+      email: "maria.santos@example.com",
+      numeroTelemovel: "965432109",
+      morada: "Avenida da República, 456, 7890-123 Porto",
+      CartaConducao: false,
+    },
+    {
+      id: "5",
+      nome: "João Silva",
+      email: "joao.silva@example.com",
+      numeroTelemovel: "912345678",
+      morada: "Rua da Liberdade, 123, 4560-789 Viseu",
+      CartaConducao: true,
+    },
+    {
+      id: "6",
+      nome: "Maria Santos",
+      email: "maria.santos@example.com",
+      numeroTelemovel: "965432109",
+      morada: "Avenida da República, 456, 7890-123 Porto",
+      CartaConducao: false,
+    },
+    {
+      id: "7",
+      nome: "João Silva",
+      email: "joao.silva@example.com",
+      numeroTelemovel: "912345678",
+      morada: "Rua da Liberdade, 123, 4560-789 Viseu",
+      CartaConducao: true,
+    },
+    {
+      id: "8",
+      nome: "Maria Santos",
+      email: "maria.santos@example.com",
+      numeroTelemovel: "965432109",
+      morada: "Avenida da República, 456, 7890-123 Porto",
+      CartaConducao: false,
+    }
+  ];
+  

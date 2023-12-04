@@ -8,6 +8,8 @@ import Header from '@app/modules/main/header/Header';
 import MenuSidebar from '@app/modules/main/menu-sidebar/MenuSidebar';
 import Footer from '@app/modules/main/footer/Footer';
 import {PfImage} from '@profabric/react-components';
+import Grafico from '@app/modules/main/grafico/Grafico';
+import Colaboradores from '@app/modules/main/listarColaboradores';
 
 const Main = () => {
   const dispatch = useDispatch();
@@ -70,7 +72,8 @@ const Main = () => {
         <div className="preloader flex-column justify-content-center align-items-center">
           <PfImage
             className="animation__shake"
-            src="/img/logo.png"
+            // src="/img/logo.png"
+            src="/img/Olisipo_LogoWhite.png"
             alt="AdminLTELogo"
             height={60}
             width={60}
@@ -88,6 +91,7 @@ const Main = () => {
           <div className="pt-3" />
           <section className="content">
             <Outlet />
+            {/* <Grafico /> */}
           </section>
         </div>
         <Footer />

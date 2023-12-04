@@ -4,41 +4,60 @@ import {Link} from 'react-router-dom';
 import {MenuItem} from '@components';
 import {PfImage} from '@profabric/react-components';
 import styled from 'styled-components';
-import {SidebarSearch} from '@app/components/sidebar-search/SidebarSearch';
+// import {SidebarSearch} from '@app/components/sidebar-search/SidebarSearch';
 import i18n from '@app/utils/i18n';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { faTwitter, faFontAwesome } from '@fortawesome/free-brands-svg-icons'
+
+library.add(fas, faTwitter, faFontAwesome)
 
 export interface IMenuItem {
   name: string;
   icon?: string;
   path?: string;
+  // image: string;
   children?: Array<IMenuItem>;
 }
+
 
 export const MENU: IMenuItem[] = [
   {
     name: i18n.t('menusidebar.label.dashboard'),
     icon: 'fas fa-tachometer-alt nav-icon',
+    // image: 'img/dashboardlogo.png',  // Provide the actual image path
     path: '/'
   },
   {
-    name: i18n.t('menusidebar.label.blank'),
-    icon: 'fas fa-wrench nav-icon',
-    path: '/blank'
-  },
-  {
-    name: i18n.t('menusidebar.label.mainMenu'),
+    name: i18n.t('Gestor de Utilizador'),
     icon: 'far fa-caret-square-down nav-icon',
     children: [
       {
-        name: i18n.t('menusidebar.label.subMenu'),
-        icon: 'fas fa-hammer nav-icon',
+        name: i18n.t('Listar/Editar Utilizador'),
+        icon: 'fas fa-cogs fa-spin nav-icon',
         path: '/sub-menu-1'
       },
-
       {
-        name: i18n.t('menusidebar.label.blank'),
-        icon: 'fas fa-cogs nav-icon',
+        name: i18n.t('Submissão de Horas'),
+        icon: 'fas fa-cogs fa-spin nav-icon',
         path: '/sub-menu-2'
+      }
+    ]
+  },
+  {
+    name: i18n.t('Gestão de Notícias'),
+    // icon: 'fas fa-wrench nav-icon',
+    icon: 'fa fa-arrow-circle-down nav-icon',
+    children: [
+      {
+        name: i18n.t('Criar Notícias'),
+        icon: 'fas fa-cogs fa-spin nav-icon',
+        path: '/sub-menu-3'
+      },
+      {
+        name: i18n.t('Listar/Editar Notícias'),
+        icon: 'fas fa-cogs fa-spin nav-icon',
+        path: '/sub-menu-4'
       }
     ]
   }
@@ -67,13 +86,13 @@ const MenuSidebar = () => {
     <aside className={`main-sidebar elevation-4 ${sidebarSkin}`}>
       <Link to="/" className="brand-link">
         <StyledBrandImage
-          src="/img/logo.png"
+           src="/img/logo.png"
           alt="AdminLTE Logo"
           width={33}
           height={33}
           rounded
         />
-        <span className="brand-text font-weight-light">AdminLTE 3</span>
+        <span className="brand-text font-weight-light">Portal Admin</span>
       </Link>
       <div className="sidebar">
         <div className="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -94,9 +113,9 @@ const MenuSidebar = () => {
           </div>
         </div>
 
-        <div className="form-inline">
+        {/* <div className="form-inline">
           <SidebarSearch />
-        </div>
+        </div> */}
 
         <nav className="mt-2" style={{overflowY: 'hidden'}}>
           <ul

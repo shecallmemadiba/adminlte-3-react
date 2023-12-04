@@ -88,6 +88,7 @@ const Register = () => {
     },
   });
 
+  
   setWindowClass('hold-transition register-page');
 
   return (

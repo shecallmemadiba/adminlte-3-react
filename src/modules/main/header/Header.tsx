@@ -5,7 +5,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {toggleControlSidebar, toggleSidebarMenu} from '@app/store/reducers/ui';
 import MessagesDropdown from '@app/modules/main/header/messages-dropdown/MessagesDropdown';
 import NotificationsDropdown from '@app/modules/main/header/notifications-dropdown/NotificationsDropdown';
-import LanguagesDropdown from '@app/modules/main/header/languages-dropdown/LanguagesDropdown';
 import UserDropdown from '@app/modules/main/header/user-dropdown/UserDropdown';
 
 const Header = () => {
@@ -42,7 +41,7 @@ const Header = () => {
             <i className="fas fa-bars" />
           </button>
         </li>
-        <li className="nav-item d-none d-sm-inline-block">
+        {/* <li className="nav-item d-none d-sm-inline-block">
           <Link to="/" className="nav-link">
             {t<string>('header.label.home')}
           </Link>
@@ -51,14 +50,11 @@ const Header = () => {
           <Link to="/" className="nav-link">
             {t<string>('header.label.contact')}
           </Link>
-        </li>
+        </li> */}
       </ul>
       <ul className="navbar-nav ml-auto">
-        <MessagesDropdown />
-        <NotificationsDropdown />
-        <LanguagesDropdown />
-        <UserDropdown />
-        <li className="nav-item">
+        {/* <UserDropdown /> */}
+        {/* <li className="nav-item">
           <button
             type="button"
             className="nav-link"
@@ -66,7 +62,7 @@ const Header = () => {
           >
             <i className="fas fa-th-large" />
           </button>
-        </li>
+        </li> */}
       </ul>
     </nav>
   );

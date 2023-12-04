@@ -1,6 +1,7 @@
 import {SmallBox} from '@app/components';
 import React from 'react';
 import {ContentHeader} from '@components';
+import Grafico from '@app/modules/main/grafico/Grafico';
 
 const Dashboard = () => {
   return (
@@ -9,7 +10,9 @@ const Dashboard = () => {
 
       <section className="content">
         <div className="container-fluid">
-          <div className="row">
+        <Grafico />
+
+          {/* <div className="row">
             <div className="col-lg-3 col-6">
               <div className="small-box bg-info">
                 <div className="inner">
@@ -72,7 +75,7 @@ const Dashboard = () => {
                 </a>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
     </div>

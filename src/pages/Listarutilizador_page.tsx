@@ -1,15 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import {ContentHeader} from '@components';
+import Colaboradores from '@app/modules/main/listarColaboradores';
+import Grafico from '@app/modules/main/grafico/Grafico';
 
-const SubMenu = () => {
+const Listarutilizador = () => {
   return (
     <div>
-      <ContentHeader title="SubMenu Page" />
+      <ContentHeader title="Listar_Editar Página" />
       <section className="content">
         <div className="container-fluid">
           <div className="card">
-            <div className="card-header">
+            {/* <div className="card-header">
               <h3 className="card-title">Title</h3>
               <div className="card-tools">
                 <button
@@ -31,11 +33,10 @@ const SubMenu = () => {
                   <i className="fa fa-times" />
                 </button>
               </div>
-            </div>
+            </div> */}
             <div className="card-body">
-              Start creating your amazing application!
+              <Colaboradores />
             </div>
-            <div className="card-footer">Footer</div>
           </div>
         </div>
       </section>
@@ -43,4 +44,4 @@ const SubMenu = () => {
   );
 };
 
-export default SubMenu;
+export default Listarutilizador;

@@ -13,9 +13,136 @@
   height: 100vh;
 }
 
+.main-header{
+  background-color: #252525;
+}
+
+
+.main-sidebar{
+  background-color: #000000;
+}
 .main-header .navbar-nav .nav-item .nav-link {
   background: transparent;
   border: none;
   outline: none;
   cursor: pointer;
+}
+
+.content-wrapper{
+  background-color: #252525;
+}
+
+.main-footer{
+  background-color: #000000;
+  /* text-align:center; */
+}
+
+.navbar-light .navbar-nav .nav-link  {
+  color: rgb(255, 255, 255);
+}
+
+
+ .navbar-nav  {
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+
+.grafico{
+  width: 100%;
+  height: 100%;
+  left: 10%;
+  position: relative;
+}
+
+
+.card-body{
+  background-color: #252525;
+}
+
+.titulonoticias{
+  width: 50%;
+  height: 250px;
+  float: left;
+  margin-right: 20%;
+  border-radius: 10px;
+}
+
+.imgnoticias{
+  width: 30%;
+  height: 200px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.Corponoticias{
+  width: 100%;
+  height: 150px;
+  border-radius: 10px;
+  margin-bottom: 2%;
+}
+
+.h2noticias{
+  color: aliceblue;
+}
+
+.h2corponoticias{
+  padding-top: 2%;
+  color: aliceblue;
+}
+
+.h2imgnoticias{
+  color: aliceblue;
+}
+
+.visiveltexto{
+  color: aliceblue;
+}
+
+.textovisiveltexto{
+  color: aliceblue;
+  padding-right: 20px;
+}
+
+
+.divcheckbox{
+  padding: 1% 4%;
+  color: aliceblue;
+  background-color: #000000;
+  border-radius: 17px;
+}
+
+input[type="checkbox"] {
+  height: 15px;
+  width: 15px;
+  border-radius: 17px;
+}
+
+input[type="checkbox"]::before {
+  height: 15px;
+  width: 15px;
+  border-radius: 17px;
+
+  transform-origin: bottom left;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+
+.visivelcheckbox{
+  cursor: pointer;
+  padding-left: 35px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+.botaoAprovar{
+  color: rgb(255, 255, 255);
+  background-color: #000000;
+  padding: 10px 60px;
+  border-radius: 17px;
 }

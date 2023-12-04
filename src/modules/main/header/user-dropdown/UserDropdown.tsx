@@ -132,11 +132,7 @@ const UserDropdown = () => {
     localStorage.removeItem('authentication');
   };
 
-  const navigateToProfile = (event: any) => {
-    event.preventDefault();
-    setDropdownOpen(false);
-    navigate('/profile');
-  };
+
 
   return (
     <StyledDropdown isOpen={dropdownOpen} hideArrow>
@@ -169,7 +165,7 @@ const UserDropdown = () => {
             </small>
           </p>
         </UserHeader>
-        <UserBody>
+        {/* <UserBody>
           <div className="row">
             <div className="col-4 text-center">
               <Link to="/">{t<string>('header.user.followers')}</Link>
@@ -181,16 +177,10 @@ const UserDropdown = () => {
               <Link to="/">{t<string>('header.user.friends')}</Link>
             </div>
           </div>
-        </UserBody>
+        </UserBody> */}
         <UserFooter>
-          <button
-            type="button"
-            className="btn btn-default btn-flat"
-            onClick={navigateToProfile}
-          >
-            {t<string>('header.user.profile')}
-          </button>
-          <button
+        
+          <button 
             type="button"
             className="btn btn-default btn-flat float-right"
             onClick={logOut}
