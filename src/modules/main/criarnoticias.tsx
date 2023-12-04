@@ -30,13 +30,14 @@ const CriarNoticias = () => {
     const newTitle = event.target.value;
 
     if (newTitle.length <= MAX_CHARACTERS) {
+      
       setTitle(newTitle);
       setTitleCount(newTitle.length);
 
       // Count words in the title
       const words = newTitle.split(/\s+/).filter((word) => word.length > 0);
       setTitleWordCount(words.length);
-    }
+    } 
   };
 
   const handleContentChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
