@@ -1,265 +1,137 @@
-import React ,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import axios from 'axios';
+import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import swal from 'sweetalert';
+import authHeader from '../../store/reducers/auth-header';
 
-import {
-  Table,
-  Header,
-  HeaderRow,
-  Body,
-  Row,
-  HeaderCell,
-  Cell,
-} from "@table-library/react-table-library/table";
-import { useTheme } from "@table-library/react-table-library/theme";
-import { getTheme } from "@table-library/react-table-library/baseline";
 
-import { nodes } from "../../data";
+const baseUrl = "http://mktiagoandre.ddns.net:8080";
+const otherUrl = "http://mktiagoandre.ddns.net:8080/delete/:id";
 
-const Component: React.FC = () => {
-  const [data, setData] = React.useState({ nodes });
+export default function List(props) {
+  const [dataUser, setdataUser] = useState([]);
+  const [searchname, setSearchname] = useState('');
+  const { idUser } = useParams();
+  const navigate = useNavigate();
 
-  const colorTheme = {
-    BaseRow: `
-        color: #141414;
-      `,
-    Row: `
-        &:hover {
-          color: orange;
-        }
+  useEffect(() => {
+    LoadUtilizador();
+  }, []);
 
-        cursor: pointer;
-                background-color: white; /* Set background color to white */
-
-      `,
-      Cell: `
-      color: white;
-    `,
-  };
-
-  const handleUpdate = (value: string, id: string) => {
-    setData((state) => ({
-      ...state,
-      nodes: state.nodes.map((node) => {
-        if (node.id === id) {
-          return { ...node, nome: value };
+  async function LoadUtilizador() {
+    const url = "http://mktiagoandre.ddns.net:8080/user/";
+    axios
+      .get(url, { headers: authHeader() })
+      .then((res) => {
+        console.log(res);
+        if (res.data.success) {
+          const data = res.data.data;
+          setdataUser(data);
         } else {
-          return node;
+          alert("Error Web Service!");
         }
-      }),
-    }));
-  };
-
-  
-
-
-  interface Node {
-    id: string;
-    nome: string;
-    email: string;
-    numeroTelemovel: string;
-    morada: string;
-    CartaConducao: boolean;
+      })
+      .catch((error) => {
+        alert(error);
+      });
   }
 
-  const stripedTheme = {
-    BaseRow: `
-        font-size: 14px;
-      `,
-    HeaderRow: `
-        background-color: #eaf5fd;
-      `,
-    Row: `
-        &:nth-of-type(odd) {
-          background-color: #d2e9fb;
-        }
 
-        &:nth-of-type(even) {
-          background-color: #eaf5fd;
-        }
-      `,
-  };
 
-  const marginTheme = {
-    BaseCell: `
-        margin: 9px;
-        padding: 11px;
-      `,
-  };
-
-  
-
-  interface RowProps {
-    item: Node;
-    onUpdate: (value: string, id: string) => void;
+  if (!dataUser) {
+    return <div>Loading...</div>;
   }
 
-  const Row: React.FC<RowProps & { theme: any }> = ({ item, onUpdate, theme }) => {
-    const [editMode, setEditMode] = useState(false);
-    const [editedNome, setEditedNome] = useState(item.nome);
-    const [editedEmail, setEditedEmail] = useState(item.email);
-    const [editedNumeroTelemovel, setEditedNumeroTelemovel] = useState(item.numeroTelemovel);
-    const [editedMorada, setEditedMorada] = useState(item.morada);
-    const [editedCartaConducao, setEditedCartaConducao] = useState(item.CartaConducao);
-    const handleEditClick = () => {
-      setEditMode(true);
-    };
 
 
+  async function handleDelete(idUser) {
+    const confirmResult = await swal({
+      title: "Apagar",
+      text: "Tem a certeza que deseja apagar o utilizador?",
+      icon: "warning",
+      buttons: ["Cancelar", "Confirmar"],
+      dangerMode: true,
+    });
 
-const handleSaveClick = () => {
-  onUpdate(editedNome, item.id, editedEmail, item.id, editedNumeroTelemovel, item.id, editedMorada, item.id, editedCartaConducao.toString(), item.id); 
-  setEditMode(false);
-};
+    if (!confirmResult) return;
 
+    try {
+      const deleteResponse = await axios.delete(baseUrl + "/user/delete/" + idUser, {
+        headers: authHeader(),
+      });
+      if (deleteResponse.data.success === true) {
+        swal("Utilizador apagado com sucesso!", { icon: 'success' }).then(() => {
+          window.location.reload();
+        });
+      } else {
+        swal("Não foi possível apagar o Utilizador!", { icon: 'error' });
+      }
+    } catch (error) {
+      swal("Ocorreu um erro, tente novamente!", { icon: 'error' });
+      console.log(error);
+    }
+  }
 
+  function handleSearch(e) {
+    setSearchname(e.target.value);
+  }
 
-  const handleCancelClick = () => {
-    setEditMode(false);
-    setEditedNome(item.nome);
-    setEditedEmail(item.email);
-    setEditedNumeroTelemovel(item.numeroTelemovel);
-    setEditedMorada(item.morada);
-    setEditedCartaConducao(item.CartaConducao);
-  };
+  const filteredData = dataUser.filter((data) => {
+    return data.name && data.name.toLowerCase().includes(searchname.toLowerCase());
+  });
 
-  
-    return (
-      <>
-        <Cell>
-        {editMode ? (
-          <input
-            style={{ width: "100%" }}
-            type="text"
-            value={editedNome}
-            onChange={(event) => setEditedNome(event.target.value)}
-          />
-        ) : (
-          item.nome
-        )}
-      </Cell>
-      <Cell>
-        {editMode ? (
-          <input
-            style={{ width: "100%" }}
-            type="text"
-            value={editedEmail}
-            onChange={(event) => setEditedEmail(event.target.value)}
-          />
-        ) : (
-          item.email
-        )}
-      </Cell>
+  function LoadFillData() {
+    if (!filteredData) {
+      return null;
+    }
 
-        <Cell>
-          {editMode ? (
-            <input
-              style={{ width: "100%" }}
-              type="text"
-              value={editedNumeroTelemovel}
-              onChange={(event) => setEditedNumeroTelemovel(event.target.value)}
-            />
-          ) : (
-            item.numeroTelemovel
-          )}
-        </Cell>
-
-        <Cell>
-          {editMode ? (
-            <input
-              style={{ width: "100%" }}
-              type="text"
-              value={editedMorada}
-              onChange={(event) => setEditedMorada(event.target.value)}
-            />
-          ) : (
-            item.morada
-          )}
-        </Cell>
-
-        <Cell>
-  {editMode ? (
-    <input
-      style={{ width: "100%" }}
-      type="text"
-      value={editedCartaConducao.toString()}
-      onChange={(event) => setEditedCartaConducao(event.target.value === 'true')}
-    />
-  ) : (
-    item.CartaConducao.toString()
-  )}
-</Cell>
-
-
-        <Cell>
-        {editMode ? (
-          <>
-            <button style={{
-                backgroundColor: 'green', // Set background color to red
-                color: '#ffffff', // Set text color to white
-                border: 'none',
-                padding: '4px 8px',
-                cursor: 'pointer',
-                fontSize: '14px',
-                marginRight: '8px',
-              }}
-              onClick={handleSaveClick}>Salvar</button>
-            <button
-              style={{
-                backgroundColor: '#ff0000', // Set background color to red
-                color: '#ffffff', // Set text color to white
-                border: 'none',
-                padding: '4px 8px',
-                cursor: 'pointer',
-                fontSize: '14px',
-                marginRight: '8px',
-              }}
-              onClick={handleCancelClick}
-            >
-              Cancelar
-            </button>          
-            </>
-        ) : (
-          <button onClick={handleEditClick}>Editar</button>
-        )}
-      </Cell>
-      </>
-    );
-  };
-
-
-
-
-  const theme = useTheme([colorTheme, stripedTheme, marginTheme]);
+    return filteredData.map((data, index) => {
+      return (
+        <tr key={index}>
+          <th>{data.idUser}</th>
+          <td>{data.name}</td>
+          <td>{data.email}</td>
+          <td>{data.phone}</td>
+          <td>{data.address}</td>
+          <td>
+            <Link className="btn btn-outline-info btn-sm" to={"/update/" + data.idUser}>Editar</Link>
+          </td>
+          <td>
+            <button type="button" className="btn btn-outline-danger btn-sm" onClick={() => handleDelete(data.idUser)}>Apagar</button>
+          </td>
+        </tr>
+      )
+    });
+  }
 
   return (
-    <Table data={data} theme={theme}>
-  {(tableList: Node[]) => (
-        <>
-          <Header>
-            <HeaderRow>
-              <HeaderCell>Nome</HeaderCell>
-              <HeaderCell>Email</HeaderCell>
-              <HeaderCell>Número de Telemóvel</HeaderCell>
-              <HeaderCell>Morada</HeaderCell>
-              <HeaderCell>Carta de Condução</HeaderCell>
-              <HeaderCell>Editar</HeaderCell> 
-            </HeaderRow>
-          </Header>
-
-          <Body>
-            {tableList.map((item) => (
-              <Row key={item.id} item={item} onUpdate={handleUpdate} theme={theme} />
-            ))}
-          </Body>
-
-        </>
-      )}
-    </Table>
+    <div style={{ background: "black", color: "white" }}>
+      <div className="input-group mb-3">
+        <input type="text" className="form-control" placeholder="Pesquisar Utilizadores..." value={searchname} onChange={handleSearch} />
+        <button className="btn btn-primary" type="button" onClick={handleSearch}>Limpar</button>
+      </div>
+      <table className="table table-hover table-striped" style={{ background: "white", color: "black" }}>
+        <thead className="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">email</th>
+            <th scope="col">Número de telemóvel</th>
+            <th scope="col">Morada</th>
+            <th colSpan={2}>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {LoadFillData()}
+        </tbody>
+      </table>
+    </div>
   );
-};
+}
 
-export default Component;
 
 
 
